@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
         console.log(results);
         res.json({
             success: true,
-            tarefas: results,
+            automoveis: results,
         });
     } catch (error) {
         res.status(500).json({
@@ -48,11 +48,11 @@ router.get("/filtro/:palavra", async (req, res) => {
     try {
         const query = `SELECT * FROM automoveis WHERE titulo LIKE :palavra;`;
 
-        const tarefas = await sequelize.query(query, {
+        const automoveis = await sequelize.query(query, {
             replacements: { palavra: `%${palavra}%` },
             type: sequelize.QueryTypes.SELECT,
         });
-        res.status(200).json(tarefas);
+        res.status(200).json(automoveis);
     } catch (error) {
         res.status(400).json({ msg: error.message });
     }

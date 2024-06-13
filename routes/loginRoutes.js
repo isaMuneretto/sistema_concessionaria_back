@@ -13,7 +13,7 @@ router.post('/login', async (req, res) => {
   console.log("entrou");
   const { email, senha } = req.body;
   console.log(email, senha);
-  const query = 'SELECT * FROM usuarios WHERE email = :email'; // Utilizando :email como marcador de posição
+  const query = 'SELECT * FROM funcionarios WHERE email = :email'; // Utilizando :email como marcador de posição
   try {
       // Usando await para resolver a promessa retornada por db.query
       const results = await sequelize.query(query, {
@@ -64,21 +64,21 @@ router.post('/login', async (req, res) => {
   }
   
   //// Rota para registrar um usuário
-  const hashPassword = (password) => {
-    return bcrypt.hashSync(password, 10); // O segundo argumento é o número de rounds de salting
+  const hashSenha = (senha) => {
+    return bcrypt.hashSync(senha, 10); // O segundo argumento é o número de rounds de salting
   };
   
   router.post('/register', async (req, res) => {
-    const { username, email, senha } = req.body;
-  console.log(username, email, senha)
+    const { nome, email, senha } = req.body;
+  console.log(nome, email, senha)
     try{
-      const senhaHash = hashPassword(senha);
+      const senhaHash = hashSenha(senha);
       /* const sql = `INSERT INTO usuarios (username, email, senha) VALUES (?, ?, ?)`;
       //console.log(senhaHash);
       const result = await sequelize.query(sql, [username, email, senhaHash]);
       res.send({ success: true, message: 'Usuário registrado com sucesso!' }); */
-      const result = await sequelize.query('INSERT INTO usuarios (username, email, senha) VALUES (:username, :email, :senhaHash)', {
-        replacements: { username, email, senhaHash },
+      const result = await sequelize.query('INSERT INTO funcionarios (nome, email, senha) VALUES (:nome, :email, :senhaHash)', {
+        replacements: { nome, email, senhaHash },
         type: sequelize.QueryTypes.INSERT,
       
       });

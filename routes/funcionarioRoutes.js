@@ -49,7 +49,7 @@ router.put('/:id', async(req, res) => {
     const { senha } = req.body; //campo a ser alterado
     try{
         
-        await sequelize.query("UPDATE usuarios SET senha = ? WHERE id = ?", { replacements: [senha, id], type: QueryTypes.UPDATE });
+        await sequelize.query("UPDATE funcionarios SET senha = ? WHERE id = ?", { replacements: [senha, id], type: QueryTypes.UPDATE });
         res.status(200).json({ message: 'Senha alterada com sucesso.' }); //statusCode indica ok no update
     }catch(error){
         res.status(400).json({msg:error.message}); //retorna status de erro e mensagens
