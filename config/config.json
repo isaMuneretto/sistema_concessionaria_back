@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "rhaisa",
+    "password": "27819814",
+    "database": "app_tarefas",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "rhaisa",
+    "password": "27819814",
+    "database": "app_tarefas",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "rhaisa",
+    "password": "27819814",
+    "database": "app_tarefas",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
