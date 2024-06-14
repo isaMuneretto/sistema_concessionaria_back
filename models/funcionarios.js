@@ -21,7 +21,7 @@ const Funcionario = sequelize.define('funcionarios', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    dataNascimento: {
+    data_nascimento: {
         type: DataTypes.DATE,
         allowNull: false,
     },

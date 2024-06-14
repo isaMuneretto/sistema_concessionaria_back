@@ -4,7 +4,8 @@ const sequelize = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY; 
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 
 
@@ -27,12 +28,16 @@ router.post('/login', async (req, res) => {
       }
 
       const user = results[0];
-      console.log("deu certo");
+      console.log("deu certo",user);
 
       try {
+        console.log("senha",senha)
+        console.log("user.senha",user.senha)
           const match = await bcrypt.compare(senha, user.senha);
+          console.log("match",match)
           if (match) {
-              const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+              const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+              console.log("token",token)
               return res.json({ token });
           } else {
               return res.status(401).send('Senha incorreta.');

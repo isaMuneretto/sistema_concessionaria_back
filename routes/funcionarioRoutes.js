@@ -7,9 +7,9 @@ const bcrypt = require('bcrypt');
 router.post('/', async (req, res) => {
     try {
         const senhaEncriptada = await bcrypt.hash(req.body.senha, 10);
-        const query = `INSERT INTO funcionarios (nome, cpf, celular, dataNascimento, email, senha) VALUES (?, ?, ?, ?, ?, ?)`;
-        const replacements = [req.body.nome, req.body.cpf, req.body.celular, req.body.dataNascimento, req.body.email, senhaEncriptada];
-
+        const query = `INSERT INTO funcionarios (nome, cpf, celular, data_nascimento, email, senha) VALUES (?, ?, ?, ?, ?, ?)`;
+        const replacements = [req.body.nome, req.body.cpf, req.body.celular, req.body.data_nascimento, req.body.email, senhaEncriptada];
+        console.log(replacements)
         const [results, metadata] = await sequelize.query(query, { replacements });
 
         res.status(201).json({
@@ -18,12 +18,14 @@ router.post('/', async (req, res) => {
             results: results,
         });
     } catch (error) {
+        console.error("Erro ao criar funcionário:", error); // Adicione este log para detalhes
         res.status(500).json({
             success: false,
             message: error.message,
         });
     }
 });
+
 
 
 // GET para listar todas os funcionarios

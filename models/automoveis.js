@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require("../db");
+const concessionarias = require  ('./concessionarias')
 
 const Automovel = sequelize.define('automoveis', {
 
@@ -13,9 +14,15 @@ const Automovel = sequelize.define('automoveis', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    concessionarias_codigo: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+    }
     
 });
 
 Automovel.sync();
+Automovel.belongsTo(concessionarias, { foreignKey: 'concessionarias_codigo' });
 
 module.exports = Automovel;
