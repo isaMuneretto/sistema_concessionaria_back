@@ -17,11 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 const automoveis = require('./routes/automovelRoutes');
 const funcionarios = require('./routes/funcionarioRoutes');
 const login = require('./routes/loginRoutes');
+const concessionarias = require('./routes/concessionariasRoutes');
 
 //definição das rotas
 app.use('/automoveis',automoveis);
 app.use('/funcionarios',funcionarios);
 app.use('/login', login);
+app.use('/concessionarias', concessionarias);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

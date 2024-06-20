@@ -36,9 +36,12 @@ router.post('/login', async (req, res) => {
           const match = await bcrypt.compare(senha, user.senha);
           console.log("match",match)
           if (match) {
-              const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-              console.log("token",token)
-              return res.json({ token });
+            const id = user.id;
+            const nome = user.nome;
+            const concessionarias_id = user.concessionarias_id;
+            const token = jwt.sign({ id:id, nome:nome, concessionarias_id :concessionarias_id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+            console.log("token",token)
+            return res.json({ token, user:{id: id, nome: nome, concessionarias_id: concessionarias_id} });
           } else {
               return res.status(401).send('Senha incorreta.');
           }
