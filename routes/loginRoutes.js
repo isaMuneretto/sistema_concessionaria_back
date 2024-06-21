@@ -76,15 +76,15 @@ router.post('/login', async (req, res) => {
     return bcrypt.hashSync(senha, 10); // O segundo argumento é o número de rounds de salting
   };
   
-  router.post('/register', async (req, res) => {
+  /*router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;
   console.log(nome, email, senha)
     try{
       const senhaHash = hashSenha(senha);
-      /* const sql = `INSERT INTO usuarios (username, email, senha) VALUES (?, ?, ?)`;
-      //console.log(senhaHash);
+      const sql = `INSERT INTO usuarios (username, email, senha) VALUES (?, ?, ?)`;
+      console.log(senhaHash);
       const result = await sequelize.query(sql, [username, email, senhaHash]);
-      res.send({ success: true, message: 'Usuário registrado com sucesso!' }); */
+      res.send({ success: true, message: 'Usuário registrado com sucesso!' }); 
       const result = await sequelize.query('INSERT INTO funcionarios (nome, email, senha) VALUES (:nome, :email, :senhaHash)', {
         replacements: { nome, email, senhaHash },
         type: sequelize.QueryTypes.INSERT,
@@ -102,7 +102,7 @@ router.post('/login', async (req, res) => {
       res.status(500).send({ success: false, message: 'Erro ao registrar usuário.' });
     }
         
-  });
+  });*/
 
 module.exports = router;
 

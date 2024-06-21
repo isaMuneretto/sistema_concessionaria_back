@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// GET para listar todas as tarefas
+// GET para listar todas os automoveis
 router.get('/', async (req, res) => {
     try {
         const query = "SELECT * FROM automoveis";
