@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
       }
 
       const user = results[0];
-      console.log("deu certo",user);
+      console.log("ok",user);
 
       try {
         console.log("senha",senha)
@@ -71,12 +71,12 @@ router.post('/login', async (req, res) => {
     }
   }
   
-  //// Rota para registrar um usuário
+  /*Rota para registrar um usuário
   const hashSenha = (senha) => {
     return bcrypt.hashSync(senha, 10); // O segundo argumento é o número de rounds de salting
   };
   
-  /*router.post('/register', async (req, res) => {
+  router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;
   console.log(nome, email, senha)
     try{

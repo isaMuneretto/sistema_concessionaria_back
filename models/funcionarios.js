@@ -42,6 +42,6 @@ const Funcionario = sequelize.define('funcionarios', {
 });
 
 Funcionario.sync();
-Automovel.belongsTo(concessionarias, { foreignKey: 'concessionarias_codigo' });
+Automovel.belongsTo(concessionarias, { foreignKey: 'concessionarias_id' });
 
 module.exports = Funcionario;

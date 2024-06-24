@@ -7,8 +7,8 @@ const sequelize = require("../db");
 
 router.post('/', async (req, res) => {
     try {
-        const query = `INSERT INTO automoveis (nome, concessionarias_codigo) VALUES (?, ?)`;
-        const replacements = [req.body.nome, req.body.concessionarias_codigo];
+        const query = `INSERT INTO automoveis (nome, concessionarias_id) VALUES (?, ?)`;
+        const replacements = [req.body.nome, req.body.concessionarias_id];
 
         const [results, metadata] = await sequelize.query(query, { replacements });
 
@@ -26,10 +26,32 @@ router.post('/', async (req, res) => {
 });
 
 // GET para listar todas os automoveis
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const query = "SELECT * FROM automoveis";
-        const results = await sequelize.query(query, { type: QueryTypes.SELECT });
+        const query = "SELECT * FROM automoveis WHERE concessionarias_id = :id";
+        const results = await sequelize.query(query, { replacements: { id: req.params.id }, type: QueryTypes.SELECT });
+        console.log(results);
+        res.json({
+            success: true,
+            automoveis: results,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
+
+router.get('/concessionaria/:id', async (req, res) => {
+    try {
+        
+        const concessionarias_id = req.params.concessionarias_id;
+        console.log(concessionarias_id);
+        const query = "SELECT * FROM automoveis WHERE concessionarias_id = :id";
+        const results = await sequelize.query(query, {
+            replacements: { id: concessionarias_id }, 
+            type: QueryTypes.SELECT });
         console.log(results);
         res.json({
             success: true,

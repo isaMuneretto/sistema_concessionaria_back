@@ -14,7 +14,7 @@ const Automovel = sequelize.define('automoveis', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    concessionarias_codigo: {
+    concessionarias_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
 
@@ -23,6 +23,6 @@ const Automovel = sequelize.define('automoveis', {
 });
 
 Automovel.sync();
-Automovel.belongsTo(concessionarias, { foreignKey: 'concessionarias_codigo' });
+Automovel.belongsTo(concessionarias, { foreignKey: 'concessionarias_id' });
 
 module.exports = Automovel;
